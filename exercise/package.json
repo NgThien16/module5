@@ -1,10 +1,13 @@
 {
-  "name": "module5",
+  "name": "exercise",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "Ss1Es6.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "private": true
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
 }
