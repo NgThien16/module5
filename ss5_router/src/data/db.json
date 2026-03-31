@@ -1,0 +1,66 @@
+{
+  "player": [
+    {
+      "id": 1,
+      "playerCode": "PLA001",
+      "name": "Neymar",
+      "birthday": "01/01/1989",
+      "transfer": 100,
+      "position": {
+        "id": 1,
+        "position": "Thủ môn"
+      }
+    },
+    {
+      "id": 2,
+      "playerCode": "PLA002",
+      "name": "Ronaldo",
+      "birthday": "01/01/1985",
+      "transfer": 100,
+      "position": {
+        "id": 1,
+        "position": "Thủ môn"
+      }
+    },
+    {
+      "id": 3,
+      "playerCode": "PLA003",
+      "name": "Messi",
+      "birthday": "01/01/1987",
+      "transfer": 100,
+      "position": {
+        "id": 1,
+        "position": "Thủ môn"
+      }
+    },
+    {
+      "playerCode": "PLA003",
+      "name": "Messi",
+      "birthday": "01/01/1987",
+      "transfer": 100,
+      "position": {
+        "id": 1,
+        "position": "Thủ môn"
+      },
+      "id": 4
+    }
+  ],
+  "position": [
+    {
+      "id": 1,
+      "position": "Thủ môn"
+    },
+    {
+      "id": 2,
+      "position": "Hậu vệ"
+    },
+    {
+      "id": 3,
+      "position": "Tiền Vệ"
+    },
+    {
+      "id": 4,
+      "position": "Tiền Đạo"
+    }
+  ]
+}

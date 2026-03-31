@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { addNew } from "../service/playerService.js";
+import React, {useEffect, useState} from "react";
+import { addNew } from "../service/PlayerService.js";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { ErrorMessage, Field, Form, Formik } from "formik";
+import {getAll as getPositionList} from "../service/PositionService.js";
 
-// 1. Đưa Validation Schema ra ngoài để tối ưu hiệu suất
 const validation = Yup.object({
     id: Yup.number()
         .typeError("ID phải là số")
@@ -23,10 +23,7 @@ const validation = Yup.object({
 });
 
 function Add() {
-    const navigate = useNavigate();
-
-    // Giá trị khởi tạo khớp với Schema
-    const initialPlayer = {
+    const player = {
         id: "",
         playerCode: "",
         name: "",
@@ -35,23 +32,40 @@ function Add() {
         position: ""
     };
 
-    const handleAdd = async (values) => {
-        try {
-            console.log("Dữ liệu gửi đi:", values);
-            await addNew(values); // Đợi lưu xong
-            toast.success("Thêm mới thành công!");
-            navigate("/player");
-        } catch (error) {
-            toast.error("Có lỗi xảy ra!");
-            console.error(error);
+    const [positionList, setPositionList] = useState([])
+    useEffect(() => {
+        const fetData = async()=>{
+            setPositionList(await getPositionList())
         }
-    };
+        fetData();
+
+
+    }, []);
+    const navigate = useNavigate();
+
+    const handleAdd = (value)=>{
+        value ={
+            ...value,
+            position: JSON.parse(value.position).id
+        }
+        console.log(value);
+        const fetData = async ()=>{
+            let isSuccess = await addNew(value);
+            if (isSuccess){
+                toast.success("Thêm mới thành công");
+            }else {
+                toast.error("Thêm mới thất bại")
+            }
+            navigate("/player");
+        }
+        fetData();
+    }
 
     return (
         <div className="container mt-4">
             <h2 className="mb-4">Thêm mới Cầu thủ</h2>
             <Formik
-                initialValues={initialPlayer}
+                initialValues={player}
                 onSubmit={handleAdd}
                 validationSchema={validation}
             >
@@ -86,16 +100,17 @@ function Add() {
                         <ErrorMessage name="transfer" component="small" className="text-danger d-block" />
                     </div>
 
-                    <div className="mb-3">
-                        <label className="form-label">Vị trí</label>
-                        <Field as="select" name="position" className="form-select">
-                            <option value="">-- Chọn vị trí --</option>
-                            <option value="Striker">Striker</option>
-                            <option value="Midfielder">Midfielder</option>
-                            <option value="Defender">Defender</option>
-                            <option value="Goalkeeper">Goalkeeper</option>
+                    <div>
+                        <Field as ={'select'} name ={'position'}>
+                            <option value={''}>--------Vị Trí----------</option>
+                            {
+                                positionList.map(cls =>(
+                                    <option key={cls.id} value={JSON.stringify(cls)}>{cls.position}</option>
+                                ))
+                            }
                         </Field>
-                        <ErrorMessage name="position" component="small" className="text-danger d-block" />
+                        <ErrorMessage name={'classCG'} className={'text-danger'} component={'small'}/>
+
                     </div>
 
                     <div className="mt-4">

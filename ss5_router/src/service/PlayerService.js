@@ -1,19 +1,44 @@
 
-const listPlayer = [
-    { id: 1, playerCode: "PLA001", name: "Neymar", birthday: "01/01/1989", transfer: 100, position: "Left Winger" },
-    { id: 2, playerCode: "PLA002", name: "Ronaldo", birthday: "01/01/1985", transfer: 100, position: "Striker" },
-    { id: 3, playerCode: "PLA003", name: "Messi", birthday: "01/01/1987", transfer: 100, position: "Right Winger" }
-];
-
-export function getAll() {
-    return [...listPlayer];
+import axios from "axios";
+const BE_URL = "http://localhost:8080"
+export async function getAll(){
+    try{
+        const res = await axios.get(`${BE_URL}/player`)
+        return res.data;
+    }catch (e){
+        console.log(e)
+    }
+    return [];
 }
-
-export function deleteById(id) {
-    return listPlayer.find(e=>e.id==id);
+export async function deleteById(id){
+    try{
+        const res = await axios.delete(`${BE_URL}/player/${id}`)
+        if (res.status=="200"){
+            return true;
+        }
+    }catch (e){
+        console.log(e)
+    }
+    return false;
 }
+export async function findById(id){
+    try{
+        const res = await axios.get(`${BE_URL}/player/${id}`)
+        return res.data;
+    }catch (e){
+        console.log(e)
+    }
+    return null;
+}
+export async function addNew(player){
+    try{
+        const res = await axios.post(`${BE_URL}/player`,player)
+        if (res.status=="201"){
+            return true;
+        }
+    }catch (e){
+        console.log(e)
+    }
+    return false;
 
-export function addNew(player) {
-
-    listPlayer.push(player);
 }

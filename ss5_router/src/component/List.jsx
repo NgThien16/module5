@@ -14,12 +14,19 @@ const List = () => {
         transfer: "",
         position: ""
     });
+    const [isShowModal, setIsShowModal] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
 
-    const [isShowModal, setIsShowModal] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
-
-    useEffect(()=>{
-        setPlayerList([...getAll()])
+    useEffect(() => {
+        const fetData = async () => {
+            try {
+                const listPlayer = await getAll();
+                setPlayerList(listPlayer);
+            } catch (e) {
+                console.error(e);
+            }
+        }
+        fetData();
     }, [isLoading]);
 
     const handleOpenModal = (player) => {
@@ -58,7 +65,9 @@ const List = () => {
                             <td>{player.name}</td>
                             <td>{player.birthday}</td>
                             <td>{player.transfer}</td>
-                            <td>{player.position}</td>
+                            <td>
+                                {player.position?.position}
+                            </td>
                             <td>
                                 <button
                                     className="btn btn-danger btn-sm"
