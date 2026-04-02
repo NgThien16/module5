@@ -1,9 +1,9 @@
 
 import axios from "axios";
 const BE_URL = "http://localhost:8080"
-export async function getAll(){
+export async function getAll(keyword=""){
     try{
-        const res = await axios.get(`${BE_URL}/player`)
+        const res = await axios.get(`${BE_URL}/player?name_like=${keyword}`)
         return res.data;
     }catch (e){
         console.log(e)
@@ -32,7 +32,7 @@ export async function findById(id){
 }
 export async function addNew(player){
     try{
-        const res = await axios.post(`${BE_URL}/player`,player)
+        const res = await axios.post(`${BE_URL}/player  `,player)
         if (res.status=="201"){
             return true;
         }
@@ -41,4 +41,13 @@ export async function addNew(player){
     }
     return false;
 
+}
+export async  function updatePlayer(id, player){
+    try{
+        const res = await axios.put(`${BE_URL}/player/${id}`,player);
+        return res.status === 200;
+    }catch (e){
+        console.log(e)
+    }
+    return false
 }

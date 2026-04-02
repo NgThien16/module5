@@ -3,7 +3,7 @@ import {getAll} from "../service/PlayerService.js"
 import {Link} from "react-router-dom";
 import Delete from "./Delete.jsx";
 
-const List = () => {
+const List = ({keyword}) => {
 
     const [playerList, setPlayerList] = useState([]);
     const [deletePlayer, setDeletePlayer] = useState({
@@ -20,14 +20,14 @@ const List = () => {
     useEffect(() => {
         const fetData = async () => {
             try {
-                const listPlayer = await getAll();
+                const listPlayer = await getAll(keyword);
                 setPlayerList(listPlayer);
             } catch (e) {
                 console.error(e);
             }
         }
         fetData();
-    }, [isLoading]);
+    }, [isLoading, keyword]);
 
     const handleOpenModal = (player) => {
         setDeletePlayer(player);
@@ -75,7 +75,8 @@ const List = () => {
                                 >
                                     Delete
                                 </button>
-                                <Link to={`/student/detail/${player.id}`}>Detail</Link>
+                                <Link to={`/player/detail/${player.id}`}>Detail</Link>
+                                <Link to={`/player/edit/${player.id}`}>Edit</Link>
                             </td>
                         </tr>
                     ))

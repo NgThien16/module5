@@ -6,15 +6,21 @@ import {Navigate, Route, Routes} from "react-router-dom";
 import Add from "./component/Add.jsx";
 import Home from "./component/Home.jsx";
 import {ToastContainer} from "react-toastify";
+import {useState} from "react";
+import Detail from "./component/Detail.jsx";
+import Edit from "./component/Edit.jsx";
 function App() {
+    const[keyword,setKey] = useState("");
   return (
       <>
-        <HeaderComponent/>
+        <HeaderComponent setKey={setKey}/>
         <Routes>
           <Route path="/" element={<Navigate to="/player" />} />
           <Route path={'/home'} element={<Home/>}/>
-          <Route path={'/player'} element={<List/>}/>
+          <Route path={'/player'} element={<List keyword ={keyword}/>}/>
           <Route path={'/player/add'} element={<Add/>}/>
+          <Route path={'/player/detail/:id'} element={<Detail/>}/>
+          <Route path={'/player/edit/:id'} element={<Edit/>}/>
         </Routes>
           <ToastContainer/>
       </>

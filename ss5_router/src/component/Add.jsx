@@ -7,10 +7,10 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import {getAll as getPositionList} from "../service/PositionService.js";
 
 const validation = Yup.object({
-    id: Yup.number()
-        .typeError("ID phải là số")
-        .required("Yêu cầu nhập id")
-        .min(1, "Id phải là số dương"),
+    // id: Yup.number()
+    //     .typeError("ID phải là số")
+    //     .required("Yêu cầu nhập id")
+    //     .min(1, "Id phải là số dương"),
     playerCode: Yup.string().required("Mã cầu thủ không được để trống"),
     name: Yup.string()
         .required("Yêu cầu nhập tên")
@@ -35,7 +35,9 @@ function Add() {
     const [positionList, setPositionList] = useState([])
     useEffect(() => {
         const fetData = async()=>{
-            setPositionList(await getPositionList())
+            const data = await getPositionList();
+            console.log("Dữ liệu Position:", data); // Kiểm tra xem data có phải là array không?
+            setPositionList(data);
         }
         fetData();
 
@@ -46,7 +48,7 @@ function Add() {
     const handleAdd = (value)=>{
         value ={
             ...value,
-            position: JSON.parse(value.position).id
+            position: JSON.parse(value.position)
         }
         console.log(value);
         const fetData = async ()=>{
@@ -70,15 +72,15 @@ function Add() {
                 validationSchema={validation}
             >
                 <Form className="border p-4 rounded shadow-sm bg-light">
-                    <div className="mb-3">
-                        <label className="form-label">ID</label>
-                        <Field type="number" name="id" className="form-control" />
-                        <ErrorMessage name="id" component="small" className="text-danger d-block" />
-                    </div>
+                    {/*<div className="mb-3">*/}
+                    {/*    <label className="form-label">ID</label>*/}
+                    {/*    <Field type="number" name="id" className="form-control" />*/}
+                    {/*    <ErrorMessage name="id" component="small" className="text-danger d-block" />*/}
+                    {/*</div>*/}
 
                     <div className="mb-3">
                         <label className="form-label">Player Code (Mã số)</label>
-                        <Field type="text" name="playerCode" className="form-control" />
+                        <Field type="text" name="playerCode" className="    form-control" />
                         <ErrorMessage name="playerCode" component="small" className="text-danger d-block" />
                     </div>
 

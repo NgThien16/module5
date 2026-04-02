@@ -1,6 +1,12 @@
-import { Link } from "react-router-dom"; // Nhớ sửa thành react-router-dom
+import { Link } from "react-router-dom";
+import {useState} from "react"; // Nhớ sửa thành react-router-dom
 
-function HeaderComponent() {
+function HeaderComponent({setKey}) {
+    const [input, setInput] = useState("");
+    const handleSearch=(e)=>{
+        e.preventDefault();
+        setKey(input);
+    }
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
             <div className="container-fluid">
@@ -46,9 +52,9 @@ function HeaderComponent() {
                     </ul>
 
                     {/* Thanh tìm kiếm */}
-                    <form className="d-flex" role="search">
-                        <input className="form-control me-2" type="search" placeholder="Search player..." aria-label="Search" />
-                        <button className="btn btn-outline-success" type="submit">Search</button>
+                    <form className="d-flex" role="search" >
+                        <input className="form-control me-2" type="search" placeholder="Search player..." aria-label="Search" value={input} onChange={(e)=>setInput(e.target.value)} />
+                        <button className="btn btn-outline-success" type="submit" onClick={handleSearch}>Search</button>
                     </form>
                 </div>
             </div>

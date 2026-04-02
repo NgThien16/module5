@@ -43,6 +43,17 @@
         "position": "Thủ môn"
       },
       "id": 4
+    },
+    {
+      "id": 5,
+      "playerCode": "PLA006",
+      "name": "Thiện",
+      "birthday": "2026-04-02",
+      "transfer": 10,
+      "position": {
+        "id": 3,
+        "position": "Tiền Vệ"
+      }
     }
   ],
   "position": [
