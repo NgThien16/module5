@@ -73,5 +73,19 @@
       "id": 4,
       "position": "Tiền Đạo"
     }
+  ],
+  "accounts" : [
+    {
+      "id": 1,
+      "username": "Thien",
+      "password":"123",
+      "role": "admin"
+    },
+    {
+      "id": 2,
+      "username": "Thien1",
+      "password":"123",
+      "role": "user"
+    }
   ]
 }

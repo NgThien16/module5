@@ -51,7 +51,7 @@ function Edit() {
     const handleUpdate = async (values) => {
         const dataToSave = {
             ...values,
-            // Parse ngược lại từ string thành object trước khi gửi về API
+            
             position: JSON.parse(values.position)
         };
 
@@ -79,7 +79,7 @@ function Edit() {
                                 initialValues={player}
                                 onSubmit={handleUpdate}
                                 validationSchema={validation}
-                                enableReinitialize={true} // Quan trọng: để form cập nhật khi player state thay đổi
+                                enableReinitialize={true}
                             >
                                 <Form>
                                     <div className="mb-3">

@@ -1,11 +1,18 @@
 import { Link } from "react-router-dom";
-import {useState} from "react"; // Nhớ sửa thành react-router-dom
+import {useState} from "react";
+import {logout} from "../redux/action.js";
+import {useDispatch, useSelector} from "react-redux";
 
 function HeaderComponent({setKey}) {
     const [input, setInput] = useState("");
     const handleSearch=(e)=>{
         e.preventDefault();
         setKey(input);
+    }
+    const myInfo = useSelector(state => state.account);
+    const dispatch = useDispatch();
+    const handleLogout =()=> {
+        dispatch(logout());
     }
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
@@ -36,6 +43,7 @@ function HeaderComponent({setKey}) {
                         <li className="nav-item">
                             <Link className="nav-link" to="/player/add">Add New Player</Link>
                         </li>
+                        <li className="nav-item text-white">{myInfo?.username}</li>
 
                         {/* Dropdown menu nếu bạn cần thêm các tính năng khác */}
                         <li className="nav-item dropdown">
@@ -46,7 +54,10 @@ function HeaderComponent({setKey}) {
                                 <li><Link className="dropdown-item" to="/settings">Settings</Link></li>
                                 <li><Link className="dropdown-item" to="/stats">Statistics</Link></li>
                                 <li><hr className="dropdown-divider" /></li>
-                                <li><a className="dropdown-item text-danger" href="#">Logout</a></li>
+                                <li className="nav-item">
+                                    <Link to={'/login'}>Login</Link>
+                                </li>
+                                <button onClick={handleLogout}>Logout</button>
                             </ul>
                         </li>
                     </ul>
@@ -56,6 +67,7 @@ function HeaderComponent({setKey}) {
                         <input className="form-control me-2" type="search" placeholder="Search player..." aria-label="Search" value={input} onChange={(e)=>setInput(e.target.value)} />
                         <button className="btn btn-outline-success" type="submit" onClick={handleSearch}>Search</button>
                     </form>
+
                 </div>
             </div>
         </nav>

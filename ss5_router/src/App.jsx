@@ -9,6 +9,7 @@ import {ToastContainer} from "react-toastify";
 import {useState} from "react";
 import Detail from "./component/Detail.jsx";
 import Edit from "./component/Edit.jsx";
+import Login from "./component/Login.jsx";
 function App() {
     const[keyword,setKey] = useState("");
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path={'/player/add'} element={<Add/>}/>
           <Route path={'/player/detail/:id'} element={<Detail/>}/>
           <Route path={'/player/edit/:id'} element={<Edit/>}/>
+          <Route path={'/login'} element={<Login/>}/>
         </Routes>
           <ToastContainer/>
       </>
